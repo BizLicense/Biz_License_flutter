@@ -7,7 +7,7 @@ class SearchForCustomer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const Header(
-        title: 'Select Customer',
+        title: 'Select Owner',
       ),
       body: GetBuilder<SearchForCustomerController>(
         init: SearchForCustomerController(),

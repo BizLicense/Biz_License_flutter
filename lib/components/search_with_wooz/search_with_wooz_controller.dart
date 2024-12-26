@@ -63,7 +63,7 @@ class SearchWithWoozController extends GetxController {
 
   List<AddressData> listAddressData = <AddressData>[];
 
-  bool isExpandedDetails = false;
+  bool isExpandedDetails = true;
   final FocusNode inputFocus = FocusNode();
 
   //* ----- Map
@@ -84,15 +84,35 @@ class SearchWithWoozController extends GetxController {
   Future<dynamic>? myFunction;
 
   @override
+  void onInit() {
+    super.onInit();
+    final AddressData myTemp = AddressData.fromMap(
+      {
+        keySiteName: 'test',
+        keyAddress: 'test',
+        keyStreet: 'test',
+        keyCity: 'test',
+        keyState: 'test',
+        keyPostcode: 'test',
+        keyCountry: 'Malawi',
+        keyCountryId: 125,
+      },
+    );
+
+    tempAddress = myTemp;
+    listAddressData.add(myTemp);
+  }
+
+  @override
   void onReady() {
-    getCountries();
+    // getCountries();
     super.onReady();
   }
 
   //* ----- Switch  Manual Address Entry
 
   AddressData? tempAddress;
-  bool isManualAddressEntry = false;
+  bool isManualAddressEntry = true;
   void toggleManualAddressEntry({bool? value}) {
     isManualAddressEntry = value!;
 
@@ -104,11 +124,11 @@ class SearchWithWoozController extends GetxController {
     if (isManualAddressEntry) {
       tempAddress = listAddressData.first;
 
-      entryCityController.text = tempAddress?.city ?? '';
-      entryCountryController.text = tempAddress?.country ?? '';
-      entryPostcodeController.text = tempAddress?.postcode ?? '';
-      entryStateController.text = tempAddress?.state ?? '';
-      entryStreetController.text = tempAddress?.street ?? '';
+      entryCityController.text = tempAddress?.city ?? 'test city';
+      entryCountryController.text = tempAddress?.country ?? 'test country';
+      entryPostcodeController.text = tempAddress?.postcode ?? 'test postcode';
+      entryStateController.text = tempAddress?.state ?? 'test state';
+      entryStreetController.text = tempAddress?.street ?? 'test street';
     } else {
       listAddressData.first = tempAddress!;
     }

@@ -364,6 +364,23 @@ class CompleteProfileController extends GetxController {
   }
 
   Future<void> onCompleteProfile() async {
+    final Map<String, Object> temp = <String, Object>{
+      'categories_id': <int>[1],
+      'electric_board_id': 2,
+      'gas_register_number': '',
+      'license_number': '',
+      'company_name': 'really',
+      'trading_name': '',
+      'registration_number': '',
+      'has_vat': 'no',
+      'vat_number': '',
+      'registered_address': 'test',
+      'postal_code': 'test',
+      'number_street_name': 'test',
+      'city': 'test',
+      'state': 'test',
+      'country_id': 218
+    };
     final Map<String, dynamic> bodyJson = <String, dynamic>{
       'categories_id': selectFormGroupId,
       'electric_board_id': electricBoardId.first,
@@ -389,19 +406,22 @@ class CompleteProfileController extends GetxController {
     };
     // consoleLog(bodyJson);
     ApiRequest(
-      method: ApiMethods.post,
-      path: keyCompleteProfile,
-      className: 'CompleteProfileController/onCompleteProfile',
-      requestFunction: onCompleteProfile,
-      withLoading: true,
-      body: compLogoFile == null
-          ? bodyJson
-          : await addFormDataToJson(
-              jsonObject: bodyJson,
-              fileKey: 'logo',
-              file: compLogoFile,
-            ),
-    ).request(
+            method: ApiMethods.post,
+            path: keyCompleteProfile,
+            className: 'CompleteProfileController/onCompleteProfile',
+            requestFunction: onCompleteProfile,
+            withLoading: true,
+            body: temp
+
+            // compLogoFile == null
+            //     ? bodyJson
+            //     : await addFormDataToJson(
+            //         jsonObject: bodyJson,
+            //         fileKey: 'logo',
+            //         file: compLogoFile,
+
+            )
+        .request(
       onSuccess: (dynamic data, dynamic response) {
         final dynamic tempUserData = myAppController.userData;
         tempUserData['isProfileComplete'] = true;

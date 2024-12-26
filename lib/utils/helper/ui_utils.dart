@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:flutter_html_to_pdf/flutter_html_to_pdf.dart';
+// import 'package:flutter_html_to_pdf/flutter_html_to_pdf.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -124,11 +124,12 @@ Future<String> onPressDownloadPdf(
   final Directory appDocDir = await getApplicationDocumentsDirectory();
   final String appDocPath = appDocDir.path;
 
-  await FlutterHtmlToPdf.convertFromHtmlContent(
-    htmlContent,
-    appDocPath,
-    pdfTitle,
-  );
+  // TODO here is the PAD generating packages
+  // await FlutterHtmlToPdf.convertFromHtmlContent(
+  //   htmlContent,
+  //   appDocPath,
+  //   pdfTitle,
+  // );
 
   dismissLoading();
 

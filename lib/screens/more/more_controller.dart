@@ -20,31 +20,31 @@ class MoreController extends GetxController {
             keyOnPress: () => Get.toNamed(routeFormTemplates),
           },
         <String, dynamic>{
-          keyTitle: 'My Settings',
+          keyTitle: 'My Profile',
           keyIcon: iconSettings,
-          keyOnPress: () => Get.toNamed(routeMySettings),
+          keyOnPress: () => Get.toNamed(routeProfile),
         },
         // <String, dynamic>{
         //   keyTitle: 'My Subscription',
         //   keyIcon: iconSubscription,
         //   keyOnPress: () => Get.toNamed(routeMySubscription),
         // },
-        <String, dynamic>{
-          keyTitle: 'Upcoming Forms',
-          keyIcon: iconForm,
-          keyOnPress: () => Get.to(() => const UpcomingForms()),
-        },
+        // <String, dynamic>{
+        //   keyTitle: 'Upcoming Forms',
+        //   keyIcon: iconForm,
+        //   keyOnPress: () => Get.to(() => const UpcomingForms()),
+        // },
         <String, dynamic>{
           keyTitle: 'Logout',
           keyIcon: iconLogout,
           keyOnPress: myAppController.onSignOut,
         },
-        if (currentMode == AppMode.dev)
-          <String, dynamic>{
-            keyTitle: 'Develop Forms',
-            keyIcon: iconForm,
-            keyOnPress: () => Get.to(() => const DevelopmentForms()),
-          },
+        // if (currentMode == AppMode.dev)
+        //   <String, dynamic>{
+        //     keyTitle: 'Develop Forms',
+        //     keyIcon: iconForm,
+        //     keyOnPress: () => Get.to(() => const DevelopmentForms()),
+        //   },
       ];
 
   @override

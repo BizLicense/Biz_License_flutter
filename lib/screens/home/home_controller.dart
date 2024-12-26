@@ -6,7 +6,9 @@ import '../../general_exports.dart';
 
 class HomeController extends GetxController {
   List<dynamic> formsData = <dynamic>[];
-  Map<String, dynamic> trialDetails = <String, dynamic>{};
+  // Map<String, dynamic> trialDetails = <String, dynamic>{};
+  UpdateCertNumberController certNumberController =
+      UpdateCertNumberController();
 
   dynamic certCountData;
   int countCompleteCert = 0;
@@ -17,6 +19,7 @@ class HomeController extends GetxController {
   @override
   Future<void> onReady() async {
     super.onReady();
+
     getAllUserData();
   }
 
@@ -44,20 +47,20 @@ class HomeController extends GetxController {
     }
   }
 
-  void getTrialDetails() {
-    ApiRequest(
-      path: '/getTrialDetails',
-      className: 'HomeController/getTrialDetails',
-      requestFunction: getTrialDetails,
-      // formatResponse: true,
-    ).request(
-      onSuccess: (dynamic data, dynamic response) {
-        trialDetails = data;
+  // void getTrialDetails() {
+  //   ApiRequest(
+  //     path: '/getTrialDetails',
+  //     className: 'HomeController/getTrialDetails',
+  //     requestFunction: getTrialDetails,
+  //     // formatResponse: true,
+  //   ).request(
+  //     onSuccess: (dynamic data, dynamic response) {
+  //       trialDetails = data;
 
-        update();
-      },
-    );
-  }
+  //       update();
+  //     },
+  //   );
+  // }
 
   String? urlSubscript;
   void getUrlSubscription() {
@@ -118,30 +121,77 @@ class HomeController extends GetxController {
   bool isHaveGas = false;
   dynamic gasNumber;
   dynamic electricNumber;
-  bool isUserSubscribe = false;
+  bool isUserSubscribe = true;
   bool isRequiredNumber = false;
   Future<void> getAllUserData() async {
     hideKeyboard();
-    startLoading();
+    // startLoading();
     ApiRequest(
       path: keyUserData,
       className: 'HomeController/getAllUserData',
       requestFunction: getAllUserData,
-      // withLoading: true,
+      withLoading: true,
       formatResponse: true,
     ).request(
       onSuccess: (dynamic data, dynamic response) {
+        allUserData = data;
+
+        update();
+
+        isUserSubscribe = true;
+
+        checkCertsNumbers();
+
+        if ((isHaveElectrical && electricNumber == null) &&
+            (isHaveGas && gasNumber == null)) {
+          consoleLog('===================inside===========');
+          //! user select Electrical and Gas not enter number for both
+          requestLicense(
+            isHaveElectrical: true,
+            isHaveGas: true,
+          );
+        } else if (isHaveElectrical && electricNumber == null) {
+          //! user select Electrical and not enter number
+          requestLicense(
+            isHaveElectrical: true,
+            isHaveGas: false,
+          );
+        } else if (isHaveGas && gasNumber == null) {
+          //! user select Gas and not enter number
+          requestLicense(
+            isHaveElectrical: false,
+            isHaveGas: true,
+          );
+        }
+
+        getCertCount();
+        certificatesController.getAllCert();
+
+        profileController.getUserProfileData(withLoading: !isUserSubscribe);
+
+        if (Get.isRegistered<MySettingsController>()) {
+          Get.find<MySettingsController>().update();
+        }
+      },
+
+      /* {
         /* myAppController.localStorage.saveToStorage(
           key: 'getAllUserData',
           value: data,
         ); */
 
+        
+
         // userDataProfile = data['user'];
         allUserData = data;
 
+        checkCertsNumbers();
+        update();
+
         getTrialDetails();
 
-        isUserSubscribe = allUserData['subscription_status'].isNotEmpty;
+        isUserSubscribe = true;
+        // allUserData['subscription_status'].isNotEmpty;
 
         // allUserData['subscription_status'].length == 1 &&
         showFreeAlert = allUserData['subscription_status'].contains('trialing');
@@ -158,15 +208,17 @@ class HomeController extends GetxController {
           moreController.update();
         }
 
-        checkCertsNumbers();
-
         update();
 
         if ((isHaveElectrical && electricNumber == null) &&
             (isHaveGas && gasNumber == null)) {
           //! user select Electrical and Gas not enter number for both
-          isRequiredNumber = true;
-          Get.bottomSheet(
+          requestLicense(
+            isHaveElectrical: true,
+            isHaveGas: true,
+          );
+          // isRequiredNumber = true;
+          /* Get.bottomSheet(
             ShowNumberMassageSheet(
               text1:
                   "It looks like you haven't provided your board information yet. To create electrical certificates, we need your electrical board selection and your license number.",
@@ -189,10 +241,14 @@ class HomeController extends GetxController {
             isScrollControlled: true,
             enableDrag: false,
             isDismissible: false,
-          );
+          ); */
         } else if (isHaveElectrical && electricNumber == null) {
           //! user select Electrical and not enter number
-          isRequiredNumber = true;
+          requestLicense(
+            isHaveElectrical: true,
+            isHaveGas: false,
+          );
+          /* isRequiredNumber = true;
           Get.bottomSheet(
             ShowNumberMassageSheet(
               text1:
@@ -215,10 +271,14 @@ class HomeController extends GetxController {
             isScrollControlled: true,
             enableDrag: false,
             isDismissible: false,
-          );
+          ); */
         } else if (isHaveGas && gasNumber == null) {
           //! user select Gas and not enter number
-          isRequiredNumber = true;
+          requestLicense(
+            isHaveElectrical: false,
+            isHaveGas: true,
+          );
+          /* isRequiredNumber = true;
           Get.bottomSheet(
             ShowNumberMassageSheet(
               text1:
@@ -241,9 +301,9 @@ class HomeController extends GetxController {
             isScrollControlled: true,
             enableDrag: false,
             isDismissible: false,
-          );
+          ); */
         } else {
-          isRequiredNumber = false;
+          // isRequiredNumber = false;
           // numbers was entered
           // if user not have any plan
           if (isUserSubscribe) {
@@ -275,18 +335,20 @@ class HomeController extends GetxController {
         if (Get.isRegistered<MySettingsController>()) {
           Get.find<MySettingsController>().update();
         }
-      },
+      }, */
+
       onError: (dynamic error) {
         dismissLoading();
       },
     );
+
     if (!myAppController.isInternetConnect) {
       final dynamic apiData = await myAppController.localStorage.getFromStorage(
         key: 'getAllUserData',
       );
       allUserData = apiData;
 
-      getTrialDetails();
+      // getTrialDetails();
 
       showFreeAlert = allUserData['subscription_status'].length == 1 &&
           allUserData['subscription_status'].contains('trialing');
@@ -336,5 +398,32 @@ class HomeController extends GetxController {
     consoleLogPretty(gasNumber, key: 'gasNumber');
     consoleLogPretty(isHaveElectrical, key: 'isHaveElectrical');
     consoleLogPretty(electricNumber, key: 'electricNumber');
+  }
+
+  Future<void> requestLicense(
+      {required bool isHaveElectrical, required bool isHaveGas}) async {
+    consoleLog('value', key: 'test inside requestLicense');
+
+    final Map<String, dynamic> temp = isHaveElectrical && isHaveGas
+        ? <String, dynamic>{
+            'license_number': 'lllll',
+            'gas_register_number': 'gggg',
+          }
+        : isHaveElectrical
+            ? <String, dynamic>{
+                'license_number': 'lllll',
+              }
+            : <String, dynamic>{
+                'license_number': 'lllll',
+                'gas_register_number': 'gggg',
+              };
+    ApiRequest(
+      method: ApiMethods.post,
+      path: '/complete-infos',
+      className: '====>UpdateCertNumberController/onUpdateCertNumber<======',
+      requestFunction: requestLicense,
+      // withLoading: false,
+      body: temp,
+    ).request();
   }
 }

@@ -130,17 +130,19 @@ class LoginController extends GetxController {
             Get.offAllNamed(routeHomeBottomBar);
           }
           // Complete profile not ready
+          //TODO Edit HERE
           else {
             myAppController.onUserAuthenticated(response[keyData]);
+            onCompleteProfile(response[keyData]);
 
-            Get.offAllNamed(
-              routeCompleteProfile,
-              arguments: <String, dynamic>{
-                keyEmail: data['user']['email'],
-                'f_name': data['user']['first_name'],
-                'l_name': data['user']['last_name'],
-              },
-            );
+            // Get.offAllNamed(
+            //   routeCompleteProfile,
+            //   arguments: <String, dynamic>{
+            //     keyEmail: data['user']['email'],
+            //     'f_name': data['user']['first_name'],
+            //     'l_name': data['user']['last_name'],
+            //   },
+            // );
           }
         },
         onError: (dynamic error) {
@@ -208,6 +210,50 @@ class LoginController extends GetxController {
         showMessage(
           description: response['status'],
         );
+      },
+    );
+  }
+
+  Future<void> onCompleteProfile(dynamic resUserData) async {
+    final Map<String, Object> temp = <String, Object>{
+      'categories_id': <int>[1],
+      'electric_board_id': 2,
+      'gas_register_number': '',
+      'license_number': '',
+      'company_name': 'really',
+      'trading_name': '',
+      'registration_number': '',
+      'has_vat': 'no',
+      'vat_number': '',
+      'registered_address': 'test',
+      'postal_code': 'test',
+      'number_street_name': 'test',
+      'city': 'test',
+      'state': 'test',
+      'country_id': 218
+    };
+
+    ApiRequest(
+      method: ApiMethods.post,
+      path: keyCompleteProfile,
+      className: 'InSplash/onCompleteProfile',
+      requestFunction: onCompleteProfile,
+      withLoading: true,
+      body: temp,
+    ).request(
+      onSuccess: (dynamic data, dynamic response) {
+        final dynamic tempUserData = myAppController.userData;
+        tempUserData['isProfileComplete'] = true;
+        myAppController.onUserUpdated(tempUserData);
+        //
+        update();
+        myAppController = Get.put(MyAppController());
+        homeBottomBarController = Get.put(HomeBottomBarController());
+        profileController = Get.put(ProfileController());
+        certificatesController = Get.put(CertificatesController());
+        homeController = Get.put(HomeController());
+
+        Get.offAllNamed(routeHomeBottomBar);
       },
     );
   }

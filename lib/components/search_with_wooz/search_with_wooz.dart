@@ -4,7 +4,7 @@ class SearchWithWooz extends StatelessWidget {
   const SearchWithWooz({
     required this.searchWithWoozController,
     this.isExpandable,
-    this.hideSearchField = false,
+    this.hideSearchField = true,
     // this.isIndividualSite = true,
     super.key,
   });
@@ -50,14 +50,14 @@ class SearchWithWooz extends StatelessWidget {
                   borderTopColor: Colors.grey[400],
                   child: Column(
                     children: <Widget>[
-                      if (controller.isManualAddressEntry)
-                        toggleManualSwitch(controller),
+                      // if (controller.isManualAddressEntry)
+                      //   toggleManualSwitch(controller),
                       CommonInput(
                         topLabel: const TopLabelText(
                           text: 'Street No  & Name',
                           isRequired: true,
                         ),
-                        value: controller.listAddressData[0].street,
+                        value: 'test address',
                         enabled: controller.isManualAddressEntry,
                         controller: controller.isManualAddressEntry
                             ? controller.entryStreetController
@@ -106,16 +106,16 @@ class SearchWithWooz extends StatelessWidget {
                           isRequired: true,
                         ),
                         value: controller.listAddressData[0].country,
-                        enabled: false,
-                        // enabled: controller.isManualAddressEntry,
+                        // enabled: false,
+                        enabled: controller.isManualAddressEntry,
                         controller: controller.isManualAddressEntry
                             ? controller.entryCountryController
                             : null,
                         onChanged: controller.onChangeInputs,
                       ),
                       // show switch if false
-                      if (!controller.isManualAddressEntry)
-                        toggleManualSwitch(controller),
+                      // if (!controller.isManualAddressEntry)
+                      //   toggleManualSwitch(controller),
                     ],
                   ),
                 ),

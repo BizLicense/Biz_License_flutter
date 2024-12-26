@@ -59,9 +59,9 @@ class Home extends StatelessWidget {
                                   Icons.timer_outlined,
                                   color: Colors.orange[700],
                                 ),
-                                CommonText(
-                                  '${controller.trialDetails['remaining_days'] ?? 0} Days until your trial ends',
-                                  marginHorizontal: 0.01,
+                                const CommonText(
+                                  // '${controller.trialDetails['remaining_days'] ?? 0} Days until your trial ends',
+                                  '', marginHorizontal: 0.01,
                                 ),
                                 TextButton(
                                   onPressed: () {

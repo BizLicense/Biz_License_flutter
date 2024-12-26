@@ -16,7 +16,12 @@ class UpdateCertNumberController extends GetxController {
       className: 'UpdateCertNumberController/onUpdateCertNumber',
       requestFunction: onUpdateCertNumber,
       // withLoading: true,
-      body: isGas && isBoth == null
+      body: <String, dynamic>{
+                  'license_number': 'lllll',
+                  'gas_register_number': 'gggg',
+                },
+      
+      /* isGas && isBoth == null
           ? <String, dynamic>{
               'gas_register_number': gasNumController.text.trim(),
             }
@@ -27,7 +32,9 @@ class UpdateCertNumberController extends GetxController {
               : <String, dynamic>{
                   'license_number': electricalNumController.text.trim(),
                   'gas_register_number': gasNumController.text.trim(),
-                },
+                }, */
+
+
     ).request(
       onSuccess: (dynamic data, dynamic response) {
         homeController.getAllUserData().then(
@@ -46,9 +53,9 @@ class UpdateCertNumberController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    isGas = Get.arguments['is_gas'];
-    isBoth = Get.arguments['is_both'];
-    update();
-    consoleLog(isBoth, key: 'isBoth');
+    // isGas = Get.arguments['is_gas'];
+    // isBoth = Get.arguments['is_both'];
+    // update();
+    // consoleLog(isBoth, key: 'isBoth');
   }
 }

@@ -7,6 +7,9 @@ import '../../general_exports.dart';
 class SplashController extends GetxController {
   bool showForceUpdate = false;
 
+  CompleteProfileController completeProfileController =
+      CompleteProfileController();
+
   @override
   void onInit() {
     SystemChrome.setPreferredOrientations(<DeviceOrientation>[
@@ -27,7 +30,26 @@ class SplashController extends GetxController {
       () {
         consoleLog(myAppController.userData, key: 'inSplash');
 
-        if (showForceUpdate) {
+        if (myAppController.userData != null) {
+          if (myAppController.userData['isProfileComplete']) {
+            Get.offAndToNamed(routeHomeBottomBar);
+          } else {
+            onCompleteProfile();
+          }
+        } else {
+          Get.offAndToNamed(routeLogin);
+        }
+
+        // Get.offAndToNamed(
+        //   // && myAppController.userData?['profile_complete']
+        //   myAppController.userData != null
+        //       ? myAppController.userData['isProfileComplete']
+        //           ? routeHomeBottomBar
+        //           : routeCompleteProfile
+        //       : routeLogin,
+        // );
+
+        /* if (showForceUpdate) {
           // * this is the dialog to till user we have important update.
           openSimpleDialog(
             title: 'Update Available',
@@ -61,7 +83,45 @@ class SplashController extends GetxController {
                     : routeCompleteProfile
                 : routeLogin,
           );
-        }
+        } */
+      },
+    );
+  }
+
+  Future<void> onCompleteProfile() async {
+    final Map<String, Object> temp = <String, Object>{
+      'categories_id': <int>[1],
+      'electric_board_id': 2,
+      'gas_register_number': '',
+      'license_number': '',
+      'company_name': 'really',
+      'trading_name': '',
+      'registration_number': '',
+      'has_vat': 'no',
+      'vat_number': '',
+      'registered_address': 'test',
+      'postal_code': 'test',
+      'number_street_name': 'test',
+      'city': 'test',
+      'state': 'test',
+      'country_id': 218
+    };
+
+    ApiRequest(
+      method: ApiMethods.post,
+      path: keyCompleteProfile,
+      className: 'InSplash/onCompleteProfile',
+      requestFunction: onCompleteProfile,
+      // withLoading: true,
+      body: temp,
+    ).request(
+      onSuccess: (dynamic data, dynamic response) {
+        final dynamic tempUserData = myAppController.userData;
+        tempUserData['isProfileComplete'] = true;
+        myAppController.onUserUpdated(tempUserData);
+        //
+        update();
+        Get.offAndToNamed(routeHomeBottomBar);
       },
     );
   }

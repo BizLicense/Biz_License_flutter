@@ -99,7 +99,7 @@ class HomeBottomBar extends StatelessWidget {
                     height: DEVICE_HEIGHT * 0.03,
                     width: DEVICE_WIDTH * 0.06,
                   ),
-                  label: 'Customers',
+                  label: 'Owners',
                 ),
                 BottomNavigationBarItem(
                   icon: SvgIconHelper(

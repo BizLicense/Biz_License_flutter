@@ -19,8 +19,8 @@ class SplashScreen extends StatelessWidget {
               paddingVertical: 0.2,
               child: SvgPicture.asset(
                 iconAppLogo,
-                width: DEVICE_WIDTH * 0.1,
-                height: DEVICE_WIDTH * 0.1,
+                width: DEVICE_WIDTH * 0.2,
+                height: DEVICE_WIDTH * 0.2,
               ),
             ),
           );

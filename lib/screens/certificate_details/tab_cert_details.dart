@@ -34,7 +34,7 @@ class CertTab extends StatelessWidget {
                         '${controller.certDetails['form_data']['site']?['name'] ?? ''}',
                   ),
                   CertTitleItem(
-                    title: 'Customer Name',
+                    title: 'Owner Name',
                     subTitle:
                         '${controller.certDetails['form_data']['customer']['name']}',
                   ),
@@ -124,19 +124,20 @@ class CertTab extends StatelessWidget {
               ),
             // controller.statusId != idCompleted &&
 
-            if (currentMode == AppMode.dev && controller.statusId != idCanceled)
-              CommonButton(
-                onPress: controller.onEditCert,
-                text: 'Edit Certificate',
-                backgroundColor: Color(AppColors.primary).withOpacity(0.3),
-                marginBottom: 0.02,
-                marginTop: 0.01,
-                elevation: 0.0,
-                fontColor: AppColors.primary,
-                overlayColor: Colors.black12,
-              )
-            else if (controller.statusId != idCompleted &&
-                controller.statusId != idCanceled)
+            // if (currentMode == AppMode.dev && controller.statusId != idCanceled)
+            //   CommonButton(
+            //     onPress: controller.onEditCert,
+            //     text: 'Edit Certificate',
+            //     backgroundColor: Color(AppColors.primary).withOpacity(0.3),
+            //     marginBottom: 0.02,
+            //     marginTop: 0.01,
+            //     elevation: 0.0,
+            //     fontColor: AppColors.primary,
+            //     overlayColor: Colors.black12,
+            //   )
+            // else
+            if (controller.statusId == idPending ||
+                controller.statusId == idInProgress)
               CommonButton(
                 onPress: controller.onEditCert,
                 text: 'Edit Certificate',
@@ -148,8 +149,8 @@ class CertTab extends StatelessWidget {
                 overlayColor: Colors.black12,
               ),
             //
-            if (controller.statusId != idCompleted &&
-                controller.statusId != idCanceled)
+            if (controller.statusId == idPending ||
+                controller.statusId == idInProgress)
               CommonButton(
                 onPress: controller.onCancelCertificate,
                 text: 'Cancel',

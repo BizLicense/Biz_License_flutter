@@ -39,7 +39,7 @@ class ProfileComponent extends StatelessWidget {
                     paddingHorizontal: 0.04,
                     paddingTop: 0.005,
                     width: 1,
-                    height: 0.36,
+                    height: 0.28,
                   ),
                   child: Column(
                     children: <Widget>[
@@ -127,7 +127,32 @@ class ProfileComponent extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: DEVICE_HEIGHT * 0.025),
-                      Row(
+                      CommonText(
+                        'Cert Usage',
+                        style: appTextStyles.h3Style().copyWith(
+                              fontColor: AppColors.textGrey,
+                              textAlign: TextAlign.start,
+                              columnCrossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                            ),
+                        containerStyle: const CommonContainerModel(
+                            // paddingLeft: 0.06,
+                            // width: 0.43,
+                            ),
+                        bottomChild: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            SizedBox(height: DEVICE_HEIGHT * 0.008),
+                            CommonText(
+                              keepCertUsage ?? '',
+                              style: appTextStyles
+                                  .h2StyleBlack()
+                                  .copyWith(textAlign: TextAlign.start),
+                            ),
+                          ],
+                        ),
+                      ),
+                      /* Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           CommonText(
@@ -207,7 +232,7 @@ class ProfileComponent extends StatelessWidget {
                           marginTop: 0.01,
                           fontSize: fontH2,
                         ),
-                      ),
+                      ), */
                     ],
                   ),
                 ),

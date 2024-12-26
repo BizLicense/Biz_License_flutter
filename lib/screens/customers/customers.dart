@@ -12,7 +12,7 @@ class Customers extends StatelessWidget {
           return Scaffold(
             appBar: Header(
               withBack: false,
-              title: 'Customers',
+              title: 'Owner',
               actionItem: ActionItem(
                 type: ActionType.search,
                 onPress: () => Get.toNamed(routeSearch),

@@ -51,44 +51,44 @@ class FormsController extends GetxController {
           },
         if (homeController.isHaveElectrical)
           <String, dynamic>{
-            keyTitle: 'Electrical',
+            keyTitle: 'Health Licenses:',
             keyItems: <Map<String, dynamic>>[
               <String, dynamic>{
                 keyId: 1,
-                keyTitle: 'Portable Appliance Testing (PAT)',
+                keyTitle: 'Restaurant and Café License',
                 keyRoute: routeFormPortableTest,
                 'form_cert_type': FormCertType.electrical,
               },
-              <String, dynamic>{
-                keyId: 4,
-                keyTitle: 'Electrical Danger Notice',
-                keyRoute: routeFormDangerNotice,
-                'form_cert_type': FormCertType.electrical,
-              },
-              <String, dynamic>{
-                keyId: 3,
-                keyTitle: 'Domestic EIC',
-                keyRoute: routeFormDomesticEic,
-                'form_cert_type': FormCertType.electrical,
-              },
-              <String, dynamic>{
-                keyId: 5,
-                keyTitle: 'EICR',
-                keyRoute: routeFormEICR,
-                'form_cert_type': FormCertType.electrical,
-              },
-              <String, dynamic>{
-                keyId: 2,
-                keyTitle: 'Minor Works',
-                keyRoute: routeFormMinorWorks,
-                'form_cert_type': FormCertType.electrical,
-              },
-              <String, dynamic>{
-                keyId: 32,
-                keyTitle: 'Electrical Isolation',
-                keyRoute: routeFormElectricalIsolation,
-                'form_cert_type': FormCertType.electrical,
-              },
+              // <String, dynamic>{
+              //   keyId: 4,
+              //   keyTitle: 'Electrical Danger Notice',
+              //   keyRoute: routeFormDangerNotice,
+              //   'form_cert_type': FormCertType.electrical,
+              // },
+              // <String, dynamic>{
+              //   keyId: 3,
+              //   keyTitle: 'Domestic EIC',
+              //   keyRoute: routeFormDomesticEic,
+              //   'form_cert_type': FormCertType.electrical,
+              // },
+              // <String, dynamic>{
+              //   keyId: 5,
+              //   keyTitle: 'EICR',
+              //   keyRoute: routeFormEICR,
+              //   'form_cert_type': FormCertType.electrical,
+              // },
+              // <String, dynamic>{
+              //   keyId: 2,
+              //   keyTitle: 'Minor Works',
+              //   keyRoute: routeFormMinorWorks,
+              //   'form_cert_type': FormCertType.electrical,
+              // },
+              // <String, dynamic>{
+              //   keyId: 32,
+              //   keyTitle: 'Electrical Isolation',
+              //   keyRoute: routeFormElectricalIsolation,
+              //   'form_cert_type': FormCertType.electrical,
+              // },
             ],
           },
       ];

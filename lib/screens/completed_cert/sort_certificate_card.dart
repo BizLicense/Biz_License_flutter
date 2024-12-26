@@ -50,12 +50,13 @@ class SortCertificateCard extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
-              CommonContainer(
+              const CommonContainer(
                 // backgroundColor: Colors.blueGrey,
                 width: 0.44,
                 alignment: AlignmentDirectional.topEnd,
                 child: CommonText(
-                  formType ?? '',
+                  // formType ?? '',
+                  'Restaurant and Café License',
                   fontSize: fontH3,
                   textAlign: TextAlign.center,
                 ),

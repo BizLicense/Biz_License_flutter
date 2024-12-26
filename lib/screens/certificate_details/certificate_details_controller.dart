@@ -21,7 +21,7 @@ class CertificateDetailsController extends GetxController
     },
     <String, dynamic>{
       keyId: 1,
-      'text': 'Customer Details',
+      'text': 'Owner Details',
     },
     <String, dynamic>{
       keyId: 2,

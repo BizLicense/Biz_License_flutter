@@ -57,7 +57,7 @@ class CreateCustomerHeader extends StatelessWidget {
                 SizedBox(
                   width: 0.7.flexWidth,
                   child: CommonText(
-                    currentIndex == 1 ? 'Customer Information' : 'Site Details',
+                    currentIndex == 1 ? 'Owner Information' : 'Site Details',
                     fontSize: fontH2,
                     textAlign: TextAlign.start,
                   ),

@@ -19,16 +19,16 @@ class More extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   SizedBox(height: DEVICE_HEIGHT * 0.07),
-                  Align(
-                    alignment: AlignmentDirectional.topEnd,
-                    child: CommonText(
-                      homeController.plan,
-                      fontColor: Colors.white,
-                      containerStyle: appContainerStyles.planContainerStyle
-                          .copyWith(marginBottom: 0.01),
-                      onPress: homeController.getUrlSubscription,
-                    ),
-                  ),
+                  // Align(
+                  //   alignment: AlignmentDirectional.topEnd,
+                  //   child: CommonText(
+                  //     homeController.plan,
+                  //     fontColor: Colors.white,
+                  //     containerStyle: appContainerStyles.planContainerStyle
+                  //         .copyWith(marginBottom: 0.01),
+                  //     onPress: homeController.getUrlSubscription,
+                  //   ),
+                  // ),
                   Container(
                     // color: Colors.green,
                     padding: EdgeInsets.symmetric(horizontal: 0.04.flexWidth),
